@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-gold: #c9a84c;
+  --color-silver: #D4D4D4;
+  --color-muted: #999999;
+  --color-card-bg: #0a0a0a;
+  --color-card-border: #1a1a1a;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-silver font-sans antialiased selection:bg-gold/30 selection:text-white;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .centered-copy {
+    @apply text-center max-w-[900px] mx-auto text-[16px] leading-[1.8] text-silver;
+  }
+
+  .centered-copy strong {
+    @apply text-white font-bold;
+  }
+}
+
+/* --- LUXURY BACKGROUND ANIMATION SYSTEM --- */
+
+.bg-animation {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Layer 1: Deep Gradient Base */
+.bg-layer-base {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 40%,
+    rgba(201, 168, 76, 0.08) 0%,
+    rgba(26, 26, 46, 0.1) 40%,
+    transparent 70%
+  );
+}
+
+/* Layer 2: Floating Glow Orbs */
+.bg-layer-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(180px);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.orb-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
+  top: -10%;
+  left: -5%;
+  animation: orbDrift1 28s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(26, 26, 46, 0.15) 0%, rgba(201, 168, 76, 0.08) 50%, transparent 70%);
+  top: 30%;
+  right: -10%;
+  animation: orbDrift2 34s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.1) 0%, transparent 70%);
+  bottom: -15%;
+  left: 30%;
+  animation: orbDrift3 24s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift1 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(60px, 40px, 0) scale(1.05); }
+  66%  { transform: translate3d(-30px, 80px, 0) scale(0.97); }
+  100% { transform: translate3d(40px, -20px, 0) scale(1.02); }
+}
+
+@keyframes orbDrift2 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(-50px, 30px, 0) scale(1.03); }
+  66%  { transform: translate3d(40px, -60px, 0) scale(0.98); }
+  100% { transform: translate3d(-20px, 50px, 0) scale(1.04); }
+}
+
+@keyframes orbDrift3 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(30px, -50px, 0) scale(1.04); }
+  66%  { transform: translate3d(-60px, 20px, 0) scale(0.96); }
+  100% { transform: translate3d(50px, 30px, 0) scale(1.01); }
+}
+
+/* Layer 3: Gold Dust Particles */
+.bg-layer-particles {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #c9a84c; /* Solid gold color, visibility handled by opacity animation */
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  opacity: 0;
+}
+
+.particle:nth-child(1) { left: 12%; top: 85%; animation: particleRise 18s 0s ease-in-out infinite; }
+.particle:nth-child(2) { left: 28%; top: 90%; animation: particleRise 22s 3s ease-in-out infinite; }
+.particle:nth-child(3) { left: 45%; top: 80%; animation: particleRise 20s 7s ease-in-out infinite; }
+.particle:nth-child(4) { left: 63%; top: 88%; animation: particleRise 25s 2s ease-in-out infinite; width: 3px; height: 3px; }
+.particle:nth-child(5) { left: 78%; top: 82%; animation: particleRise 19s 10s ease-in-out infinite; }
+.particle:nth-child(6) { left: 8%; top: 75%; animation: particleRise 24s 5s ease-in-out infinite; }
+.particle:nth-child(7) { left: 35%; top: 92%; animation: particleRise 21s 12s ease-in-out infinite; }
+.particle:nth-child(8) { left: 55%; top: 78%; animation: particleRise 26s 8s ease-in-out infinite; }
+.particle:nth-child(9) { left: 72%; top: 95%; animation: particleRise 17s 15s ease-in-out infinite; width: 3px; height: 3px; }
+.particle:nth-child(10) { left: 91%; top: 83%; animation: particleRise 23s 4s ease-in-out infinite; }
+.particle:nth-child(11) { left: 18%; top: 70%; animation: particleRise 27s 9s ease-in-out infinite; }
+.particle:nth-child(12) { left: 42%; top: 88%; animation: particleRise 20s 14s ease-in-out infinite; }
+.particle:nth-child(13) { left: 85%; top: 76%; animation: particleRise 22s 6s ease-in-out infinite; width: 3px; height: 3px; }
+.particle:nth-child(14) { left: 50%; top: 94%; animation: particleRise 19s 11s ease-in-out infinite; }
+.particle:nth-child(15) { left: 5%; top: 86%; animation: particleRise 25s 1s ease-in-out infinite; }
+
+@keyframes particleRise {
+  0% { transform: translate3d(0, 0, 0) scale(0); opacity: 0; }
+  10% { transform: translate3d(5px, -20px, 0) scale(1); opacity: 0.25; }
+  50% { transform: translate3d(-8px, -120px, 0) scale(1); opacity: 0.15; }
+  90% { transform: translate3d(12px, -250px, 0) scale(0.5); opacity: 0.08; }
+  100% { transform: translate3d(10px, -300px, 0) scale(0); opacity: 0; }
+}
+
+/* Layer 4: Horizon Shimmer Line */
+.bg-layer-shimmer {
+  position: fixed;
+  top: 35%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 20%,
+    rgba(201, 168, 76, 0.08) 35%,
+    rgba(201, 168, 76, 0.15) 50%,
+    rgba(201, 168, 76, 0.08) 65%,
+    transparent 80%,
+    transparent 100%
+  );
+  animation: shimmerPulse 12s ease-in-out infinite alternate;
+}
+
+@keyframes shimmerPulse {
+  0% { opacity: 0; transform: scaleX(0.6) translate3d(0, 0, 0); }
+  50% { opacity: 1; transform: scaleX(1) translate3d(0, 0, 0); }
+  100% { opacity: 0; transform: scaleX(0.7) translate3d(0, 0, 0); }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .orb-3 { display: none; }
+  .orb-1 { width: 350px; height: 350px; }
+  .orb-2 { width: 300px; height: 300px; }
+  .particle:nth-child(n+7) { display: none; }
+  .bg-layer-shimmer { display: none; }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .orb, .particle, .bg-layer-shimmer {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* ═══════════════════════════════════════════ */
+/* NAVBAR                                      */
+/* ═══════════════════════════════════════════ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  z-index: 1000;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+}
+
+/* Desktop Nav Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  color: #D4D4D4;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+.nav-link:hover {
+  color: #c9a84c;
+  background: rgba(201, 168, 76, 0.06);
+}
+
+/* ACTIVE state — gold text + gold underline */
+.nav-link.active {
+  color: #c9a84c;
+  position: relative;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: #c9a84c;
+  border-radius: 1px;
+}
+
+/* Hamburger Button (hidden on desktop) */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #D4D4D4;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu Overlay (hidden by default) */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  width: 280px;
+  height: calc(100vh - 70px);
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(201, 168, 76, 0.1);
+  padding: 24px;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-link {
+  display: block;
+  color: #D4D4D4;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 14px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+.mobile-link:hover,
+.mobile-link:active {
+  color: #c9a84c;
+  background: rgba(201, 168, 76, 0.06);
+}
+
+.mobile-link.active {
+  color: #c9a84c;
+  background: rgba(201, 168, 76, 0.08);
+  border-left: 2px solid #c9a84c;
+}
+
+/* ═══════════════════════════════════════════ */
+/* RESPONSIVE — MOBILE (below 768px)           */
+/* ═══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide desktop links */
+  }
+
+  .nav-hamburger {
+    display: flex; /* Show hamburger */
+  }
+
+  .mobile-menu {
+    display: block; /* Enable mobile menu (still off-screen until .open) */
+  }
+}
+
+/* ═══════════════════════════════════════════ */
+/* PAGE BODY OFFSET (so content isn't hidden   */
+/* behind the fixed navbar)                    */
+/* ═══════════════════════════════════════════ */
+
+body {
+  padding-top: 70px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* offset for fixed navbar */
+}
+
+/* ═══════════════════════════════════════════ */
+/* CALENDAR SECTION                            */
+/* ═══════════════════════════════════════════ */
+
+.calendar-section {
+  padding: 40px 0 60px;
+  position: relative;
+  z-index: 10;
+}
+
+.calendar-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.calendar-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+.calendar-subtitle {
+  font-size: 15px;
+  color: #999;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+.calendar-frame {
+  background: #0a0a0a;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(201, 168, 76, 0.04);
+  overflow: hidden;
+}
+
+.calendar-frame iframe {
+  width: 100%;
+  min-height: 900px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.calendar-reassurance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #777;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .calendar-section {
+    padding: 24px 0 40px;
+  }
+
+  .calendar-frame {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  
+  .calendar-frame iframe {
+    min-height: 800px;
+  }
+
+  .calendar-title {
+    font-size: 20px;
+  }
+
+  .calendar-reassurance {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .calendar-reassurance .reassurance-dot {
+    display: none;
+  }
+}
