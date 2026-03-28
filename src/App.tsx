@@ -120,74 +120,75 @@ const BackgroundElements = () => {
 };
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   useEffect(() => {
-    if (isOpen) {
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks  = document.getElementById('navLinks');
+    const overlay   = document.getElementById('navOverlay');
+
+    if (!hamburger || !navLinks || !overlay) return;
+
+    function openMenu() {
+      hamburger!.classList.add('open');
+      navLinks!.classList.add('open');
+      overlay!.classList.add('open');
       document.body.style.overflow = 'hidden';
-    } else {
+    }
+
+    function closeMenu() {
+      hamburger!.classList.remove('open');
+      navLinks!.classList.remove('open');
+      overlay!.classList.remove('open');
       document.body.style.overflow = '';
     }
-  }, [isOpen]);
+
+    const handleHamburgerClick = () => {
+      navLinks!.classList.contains('open') ? closeMenu() : openMenu();
+    };
+
+    hamburger.addEventListener('click', handleHamburgerClick);
+    overlay.addEventListener('click', closeMenu);
+
+    const links = navLinks.querySelectorAll('.nav-link');
+    links.forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    return () => {
+      hamburger.removeEventListener('click', handleHamburgerClick);
+      overlay.removeEventListener('click', closeMenu);
+      links.forEach(function(link) {
+        link.removeEventListener('click', closeMenu);
+      });
+    };
+  }, []);
 
   return (
-    <nav className="navbar">
-      <div className="nav-inner">
-        {/* Logo — links to main website */}
-        <a href="https://www.regalisrealtymedia.com" className="nav-logo">
-          <img 
-            src="https://cdn.prod.website-files.com/6695980889d8d99cedb29bc7/677588ce72f981235e0deeb9_Regalis%20Realty%20Logo%20Symbol.png" 
-            alt="Regalis Realty Media" 
-            className="nav-logo-img" 
-          />
-        </a>
-
-        {/* Desktop Navigation Links */}
-        <div className="nav-links" id="navLinks">
-          <a href="https://www.regalisrealtymedia.com" className="nav-link">Home</a>
-          <a href="https://regalisrealtymedia25.pixieset.com/regalisrealtymediaportfolio/compassphotos/" className="nav-link" target="_blank">Portfolio</a>
-          <a href="https://pricing.regalisrealtymedia.com" className="nav-link" id="nav-pricing">Pricing</a>
-          <a href="https://calculator.regalisrealtymedia.com" className="nav-link" id="nav-calculator">Calculator</a>
-          <a href="https://catalog.regalisrealtymedia.com" className="nav-link" id="nav-catalog">Catalog</a>
-          <a href="https://branding.regalisrealtymedia.com" className="nav-link active" id="nav-branding">Branding</a>
-          <a href="https://portalguide.regalisrealtymedia.com" className="nav-link" id="nav-portal">Portal</a>
-          <a href="https://www.regalisrealtymedia.com/calendar" className="nav-link">Contact</a>
+    <>
+      <nav className="regalis-nav" id="regalisNav">
+        <div className="nav-inner">
+          <a href="https://www.regalisrealtymedia.com" className="nav-logo">
+            <img src="https://cdn.prod.website-files.com/6695980889d8d99cedb29bc7/677588ce72f981235e0deeb9_Regalis%20Realty%20Logo%20Symbol.png" alt="Regalis Realty Media" className="nav-logo-img" />
+          </a>
+          <div className="nav-links" id="navLinks">
+            <a href="https://www.regalisrealtymedia.com" className="nav-link">Home</a>
+            <a href="https://regalisrealtymedia25.pixieset.com/regalisrealtymediaportfolio/compassphotos/" className="nav-link" target="_blank" rel="noopener noreferrer">Portfolio</a>
+            <a href="https://pricing.regalisrealtymedia.com" className="nav-link">Pricing</a>
+            <a href="https://calculator.regalisrealtymedia.com" className="nav-link">Calculator</a>
+            <a href="https://catalog.regalisrealtymedia.com" className="nav-link">Catalog</a>
+            <a href="https://branding.regalisrealtymedia.com" className="nav-link active">Branding</a>
+            <a href="https://portal.regalisrealtymedia.com" className="nav-link">Portal</a>
+            <a href="https://contactus.regalisrealtymedia.com" className="nav-link">Contact</a>
+            <a href="https://prep.regalisrealtymedia.com" className="nav-link">Listing Checklist</a>
+          </div>
+          <button className="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </button>
         </div>
-
-        {/* Mobile Hamburger Button */}
-        <button 
-          className="nav-hamburger" 
-          id="navHamburger" 
-          aria-label="Toggle navigation menu"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span 
-            className="hamburger-line" 
-            style={isOpen ? { transform: 'rotate(45deg) translate(5px, 5px)' } : {}}
-          ></span>
-          <span 
-            className="hamburger-line" 
-            style={isOpen ? { opacity: 0 } : {}}
-          ></span>
-          <span 
-            className="hamburger-line" 
-            style={isOpen ? { transform: 'rotate(-45deg) translate(5px, -5px)' } : {}}
-          ></span>
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu ${isOpen ? 'open' : ''}`} id="mobileMenu">
-        <a href="https://www.regalisrealtymedia.com" className="mobile-link" onClick={() => setIsOpen(false)}>Home</a>
-        <a href="https://regalisrealtymedia25.pixieset.com/regalisrealtymediaportfolio/compassphotos/" className="mobile-link" target="_blank" onClick={() => setIsOpen(false)}>Portfolio</a>
-        <a href="https://pricing.regalisrealtymedia.com" className="mobile-link" id="mobile-nav-pricing" onClick={() => setIsOpen(false)}>Pricing</a>
-        <a href="https://calculator.regalisrealtymedia.com" className="mobile-link" id="mobile-nav-calculator" onClick={() => setIsOpen(false)}>Calculator</a>
-        <a href="https://catalog.regalisrealtymedia.com" className="mobile-link" id="mobile-nav-catalog" onClick={() => setIsOpen(false)}>Catalog</a>
-        <a href="https://branding.regalisrealtymedia.com" className="mobile-link active" id="mobile-nav-branding" onClick={() => setIsOpen(false)}>Branding</a>
-        <a href="https://portalguide.regalisrealtymedia.com" className="mobile-link" id="mobile-nav-portal" onClick={() => setIsOpen(false)}>Portal</a>
-        <a href="https://www.regalisrealtymedia.com/calendar" className="mobile-link" onClick={() => setIsOpen(false)}>Contact</a>
-      </div>
-    </nav>
+      </nav>
+      <div className="nav-overlay" id="navOverlay"></div>
+    </>
   );
 };
 
@@ -204,6 +205,9 @@ const Footer = () => {
         <div className="space-y-1">
           <p className="text-gold text-[14px] font-medium">Regalis Realty Media</p>
           <p className="text-[#666] text-[12px]">All rights reserved 2025</p>
+          <p className="text-[#D4D4D4] text-[14px] mt-2">
+            <a href="tel:9176838034" style={{ color: '#D4D4D4', textDecoration: 'none' }}>(917) 683-8034</a>
+          </p>
         </div>
       </div>
     </footer>
@@ -603,9 +607,10 @@ export default function App() {
               </Button>
               <div className="space-y-2">
                 <p className="text-muted text-[14px]">Free 45-minute call · No commitment</p>
-                <a href="tel:9176838034" className="text-muted text-[14px] hover:text-gold transition-colors flex items-center justify-center gap-2">
-                  <Phone className="w-3 h-3" /> (917) 683-8034
-                </a>
+                <div className="flex items-center justify-center gap-2">
+                  <Phone className="w-3 h-3 text-[#D4D4D4]" /> 
+                  <a href="tel:9176838034" style={{ color: '#D4D4D4', textDecoration: 'none' }}>(917) 683-8034</a>
+                </div>
               </div>
             </div>
           </div>
