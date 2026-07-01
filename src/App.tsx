@@ -167,13 +167,12 @@ const Navbar = () => {
       <nav className="regalis-nav" id="regalisNav">
         <div className="nav-inner">
           <a href="https://www.regalisrealtymedia.com" className="nav-logo">
-            <img src="https://cdn.prod.website-files.com/6695980889d8d99cedb29bc7/677588ce72f981235e0deeb9_Regalis%20Realty%20Logo%20Symbol.png" alt="Regalis Realty Media" className="nav-logo-img" />
+            <img src="https://cdn.prod.website-files.com/6695980889d8d99cedb29bc7/66c7f601fff376e4c95274b3_Regalis%20Realty%20Main%20Logo%20(1).png" alt="Regalis Realty Media" className="nav-logo-img" />
           </a>
           <div className="nav-links" id="navLinks">
             <a href="https://www.regalisrealtymedia.com" className="nav-link">Home</a>
             <a href="https://regalisrealtymedia25.pixieset.com/regalisrealtymediaportfolio/compassphotos/" className="nav-link" target="_blank" rel="noopener noreferrer">Portfolio</a>
             <a href="https://pricing.regalisrealtymedia.com" className="nav-link">Pricing</a>
-            <a href="https://calculator.regalisrealtymedia.com" className="nav-link">Calculator</a>
             <a href="https://catalog.regalisrealtymedia.com" className="nav-link">Catalog</a>
             <a href="https://branding.regalisrealtymedia.com" className="nav-link active">Branding</a>
             <a href="https://portal.regalisrealtymedia.com" className="nav-link">Portal</a>
@@ -194,20 +193,13 @@ const Navbar = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0a0a0a] py-10 px-6 border-t border-white/5 relative z-10">
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-6">
-        <img 
-          src="https://cdn.prod.website-files.com/6695980889d8d99cedb29bc7/66c7f601fff376e4c95274b3_Regalis%20Realty%20Main%20Logo%20(1).png" 
-          alt="Regalis Main Logo" 
-          className="max-w-[200px] h-auto"
-          referrerPolicy="no-referrer"
-        />
-        <div className="space-y-1">
-          <p className="text-gold text-[14px] font-medium">Regalis Realty Media</p>
-          <p className="text-[#666] text-[12px]">All rights reserved 2025</p>
-          <p className="text-[#D4D4D4] text-[14px] mt-2">
-            <a href="tel:9176838034" style={{ color: '#D4D4D4', textDecoration: 'none' }}>(917) 683-8034</a>
-          </p>
+    <footer className="bg-black py-10 px-6 border-t border-white/5 relative z-10">
+      <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-4">
+        <p className="text-muted text-[14px]">© 2026 Regalis Realty Media</p>
+        <div className="flex items-center justify-center gap-4 text-[14px]">
+          <a href="https://termsandconditions.regalisrealtymedia.com/" className="text-gold hover:text-gold/80 transition-colors">Terms &amp; Conditions</a>
+          <span className="text-muted/50">|</span>
+          <a href="https://privacypolicy.regalisrealtymedia.com/" className="text-gold hover:text-gold/80 transition-colors">Privacy Policy</a>
         </div>
       </div>
     </footer>
